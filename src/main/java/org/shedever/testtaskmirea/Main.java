@@ -1,9 +1,13 @@
 package org.shedever.testtaskmirea;
 
 import org.shedever.testtaskmirea.entity.*;
+import org.shedever.testtaskmirea.model.Mark;
+import org.shedever.testtaskmirea.model.MarkRecord;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
@@ -28,6 +32,7 @@ public class Main {
                                                 new StudyObject("Системное администрирование", teachers.get(3), 1),
                                                 new StudyObject("Криптографические методы защиты информации", teachers.get(2), 1));
 
+
         students.get(0).addMark(objects.get(0), 1, Mark.Great);
         students.get(0).addMark(objects.get(1), 1, Mark.Great);
         students.get(0).addMark(objects.get(2), 1, Mark.Great);
@@ -39,6 +44,42 @@ public class Main {
         students.get(0).addMark(objects.get(5), 1, Mark.Good);
         students.get(0).addMark(objects.get(3), 1, Mark.Bad);
 
-        System.out.printf(students.get(0).toString());
+        students.get(1).addMark(objects.get(0), 1, Mark.DidntShow);
+        students.get(1).addMark(objects.get(1), 1, Mark.DidntShow);
+        students.get(1).addMark(objects.get(2), 1, Mark.DidntShow);
+
+        students.get(2).addMark(objects.get(5), 1, Mark.DidntShow);
+        students.get(2).addMark(objects.get(3), 1, Mark.DidntShow);
+        students.get(2).addMark(objects.get(7), 1, Mark.DidntShow);
+
+        students.get(3).addMark(objects.get(1), 1, Mark.DidntShow);
+        students.get(3).addMark(objects.get(2), 1, Mark.DidntShow);
+        students.get(3).addMark(objects.get(3), 1, Mark.DidntShow);
+
+
+        System.out.println(students.get(0).toString());
+
+        countDebts(students);
+    }
+
+    public static void countDebts(List<Student> students){
+        Map<StudyObject, Integer> debts = new HashMap<>();
+
+        for(Student student : students){
+            for (MarkRecord markRecord : student.getGradebook()){
+                if (markRecord.getMark() == Mark.DidntShow){
+                    if (!debts.containsKey(markRecord.getStudyObject())){
+                        debts.put(markRecord.getStudyObject(), 1);
+                    }
+                    else {
+                        debts.put(markRecord.getStudyObject(), debts.get(markRecord.getStudyObject()) + 1);
+                    }
+                }
+            }
+        }
+
+        debts.entrySet().stream()
+                .sorted(Map.Entry.<StudyObject, Integer>comparingByValue().reversed())
+                .forEach(entry -> System.out.println(entry.getKey().getName() + " - " + entry.getValue()));
     }
 }

@@ -2,6 +2,8 @@ package org.shedever.testtaskmirea.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.shedever.testtaskmirea.model.Mark;
+import org.shedever.testtaskmirea.model.MarkRecord;
 
 import java.util.ArrayList;
 import java.util.List;
