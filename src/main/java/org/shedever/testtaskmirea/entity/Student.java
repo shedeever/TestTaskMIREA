@@ -21,7 +21,11 @@ public class Student {
     }
 
     public void addMark(StudyObject studyObject, int term, Mark mark) {
-        this.gradebook.add(new MarkRecord(this, studyObject, studyObject.getTeacher(), term, mark));
+        try {
+            this.gradebook.add(new MarkRecord(this, studyObject, studyObject.getTeacher(), term, mark));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public float averangeMark(){

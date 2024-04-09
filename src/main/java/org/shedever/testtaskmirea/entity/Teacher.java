@@ -6,7 +6,7 @@ import lombok.Setter;
 @Setter
 @Getter
 public class Teacher {
-    protected String name;
+    private String name;
 
     public Teacher(String name) {
         this.name = name;

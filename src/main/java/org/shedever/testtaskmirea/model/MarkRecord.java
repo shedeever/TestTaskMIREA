@@ -10,16 +10,15 @@ public class MarkRecord {
     private final Student student;
     private final StudyObject studyObject;
     private final Teacher teacher;
-    private int term;
-    private Mark mark;
+    private final int term;
+    private final Mark mark;
 
-    public MarkRecord(Student student, StudyObject studyObject, Teacher teacher, int term, Mark mark) {
+    public MarkRecord(Student student, StudyObject studyObject, Teacher teacher, int term, Mark mark) throws Exception {
         this.student = student;
         this.studyObject = studyObject;
         this.teacher = teacher;
         if (studyObject.getCountOfTerms() < term) {
-            System.out.println("Этот предмет состоит из " + studyObject.getCountOfTerms() + " семестров");
-            return;
+            throw new Exception("Этот предмет состоит из " + studyObject.getCountOfTerms() + " семестров");
         }
         else {
             this.term = term;
