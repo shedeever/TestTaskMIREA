@@ -58,8 +58,14 @@ public class Main {
 
 
         System.out.println(students.get(0).toString());
+        System.out.println("----------------------------------");
 
         countDebts(students);
+
+        for (Student student : students) {
+            System.out.println("----------------------------------");
+            student.showGradebook();
+        }
     }
 
     public static void countDebts(List<Student> students){

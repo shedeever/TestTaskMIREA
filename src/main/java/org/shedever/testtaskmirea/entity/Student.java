@@ -34,6 +34,12 @@ public class Student {
         return (float) sum / gradebook.size();
     }
 
+    public void showGradebook(){
+        for (MarkRecord mark : gradebook) {
+            System.out.println(mark);
+        }
+    }
+
     private int getCountByMark(Mark mark) {
         int count = 0;
         for (MarkRecord record : gradebook) {

@@ -26,4 +26,14 @@ public class MarkRecord {
         }
         this.mark = mark;
     }
+
+    @Override
+    public String toString() {
+        return String.format("| %s | %d | %s | %s | %s |",
+                student.getName(),
+                term,
+                studyObject.getName(),
+                teacher.getName(),
+                mark.getStrvalue());
+    }
 }

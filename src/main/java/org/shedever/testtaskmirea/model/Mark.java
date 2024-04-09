@@ -1,14 +1,26 @@
 package org.shedever.testtaskmirea.model;
 
+
 public enum Mark {
-    Great(5), Well(4), Good(3), Bad(2), DidntShow(0);
+    Great(5, "Отлично"),
+    Well(4, "Хорошо"),
+    Good(3, "Удовлетворительно"),
+    Bad(2, "Неудовлетворительно"),
+    DidntShow(0, "Не явился");
 
     private final int mark;
-    Mark(int mark) {
+    private final String strvalue;
+
+    Mark(int mark, String strvalue) {
         this.mark = mark;
+        this.strvalue = strvalue;
     }
 
     public int getValue() {
         return mark;
+    }
+
+    public String getStrvalue() {
+        return strvalue;
     }
 }
