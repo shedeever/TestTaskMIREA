@@ -31,6 +31,10 @@ public class Student {
     public float averangeMark(){
         int sum = 0;
 
+        if (gradebook.isEmpty()){
+            return 0;
+        }
+
         for (MarkRecord mark : gradebook) {
             sum += mark.getMark().getValue();
         }
@@ -44,7 +48,7 @@ public class Student {
         }
     }
 
-    private int getCountByMark(Mark mark) {
+    public int getCountByMark(Mark mark) {
         int count = 0;
         for (MarkRecord record : gradebook) {
             if (record.getMark() == mark) {

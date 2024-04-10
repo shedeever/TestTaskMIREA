@@ -1,13 +1,14 @@
 package org.shedever.testtaskmirea;
 
 import org.shedever.testtaskmirea.entity.*;
+import org.shedever.testtaskmirea.model.ExcelFormatter;
 import org.shedever.testtaskmirea.model.Mark;
 import org.shedever.testtaskmirea.model.MarkRecord;
+import org.shedever.testtaskmirea.model.WordFormatter;
 
+import java.io.FileNotFoundException;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
@@ -57,35 +58,21 @@ public class Main {
         students.get(3).addMark(objects.get(3), 1, Mark.DidntShow);
 
 
-        System.out.println(students.get(0).toString());
-        System.out.println("----------------------------------");
-
-        countDebts(students);
+        ExcelFormatter excelFormatter = new ExcelFormatter();
+        excelFormatter.createStudentsList(students);
+        excelFormatter.createBadObjects(MarkRecord.countDebts(students));
 
         for (Student student : students) {
-            System.out.println("----------------------------------");
-            student.showGradebook();
-        }
-    }
-
-    public static void countDebts(List<Student> students){
-        Map<StudyObject, Integer> debts = new HashMap<>();
-
-        for(Student student : students){
-            for (MarkRecord markRecord : student.getGradebook()){
-                if (markRecord.getMark() == Mark.DidntShow){
-                    if (!debts.containsKey(markRecord.getStudyObject())){
-                        debts.put(markRecord.getStudyObject(), 1);
-                    }
-                    else {
-                        debts.put(markRecord.getStudyObject(), debts.get(markRecord.getStudyObject()) + 1);
-                    }
-                }
-            }
+            excelFormatter.createGradeBook(student);
         }
 
-        debts.entrySet().stream()
-                .sorted(Map.Entry.<StudyObject, Integer>comparingByValue().reversed())
-                .forEach(entry -> System.out.println(entry.getKey().getName() + " - " + entry.getValue()));
+        excelFormatter.saveFile("documents/Отчет.xlsx");
+
+        WordFormatter.createStudentsList(students);
+        WordFormatter.createBadObjects(MarkRecord.countDebts(students));
+
+        for (Student student : students) {
+            WordFormatter.createGradeBook(student);
+        }
     }
 }
