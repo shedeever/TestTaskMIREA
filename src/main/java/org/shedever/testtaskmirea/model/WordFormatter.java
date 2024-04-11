@@ -6,10 +6,8 @@ import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 import org.shedever.testtaskmirea.entity.Student;
 import org.shedever.testtaskmirea.entity.StudyObject;
 
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -80,7 +78,7 @@ public class WordFormatter {
             row.getCell(0).setText(mark.getStudyObject().getName());
             row.getCell(1).setText(String.valueOf(mark.getTerm()));
             row.getCell(2).setText(mark.getTeacher().getName());
-            row.getCell(3).setText(mark.getMark().getStrvalue());
+            row.getCell(3).setText(mark.getMark().getDescription());
         }
 
         saveFile("documents/Зачетка " + student.getName() + ".docx", document);

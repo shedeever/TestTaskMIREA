@@ -1,6 +1,7 @@
 package org.shedever.testtaskmirea.model;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.shedever.testtaskmirea.entity.Student;
 import org.shedever.testtaskmirea.entity.StudyObject;
 import org.shedever.testtaskmirea.entity.Teacher;
@@ -11,15 +12,14 @@ import java.util.List;
 import java.util.Map;
 
 @Getter
+@NoArgsConstructor
 public class MarkRecord {
-    private final Student student;
-    private final StudyObject studyObject;
-    private final Teacher teacher;
-    private final int term;
-    private final Mark mark;
+    private StudyObject studyObject;
+    private Teacher teacher;
+    private int term;
+    private Mark mark;
 
-    public MarkRecord(Student student, StudyObject studyObject, Teacher teacher, int term, Mark mark) throws Exception {
-        this.student = student;
+    public MarkRecord(StudyObject studyObject, Teacher teacher, int term, Mark mark) throws Exception {
         this.studyObject = studyObject;
         this.teacher = teacher;
         if (studyObject.getCountOfTerms() < term) {
@@ -58,11 +58,10 @@ public class MarkRecord {
 
     @Override
     public String toString() {
-        return String.format("| %s | %d | %s | %s | %s |",
-                student.getName(),
+        return String.format("| %d | %s | %s | %s |",
                 term,
                 studyObject.getName(),
                 teacher.getName(),
-                mark.getStrvalue());
+                mark.getDescription());
     }
 }

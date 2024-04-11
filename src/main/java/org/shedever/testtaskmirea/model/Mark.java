@@ -1,6 +1,9 @@
 package org.shedever.testtaskmirea.model;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+import lombok.Getter;
 
+@Getter
 public enum Mark {
     Great(5, "Отлично"),
     Well(4, "Хорошо"),
@@ -8,19 +11,20 @@ public enum Mark {
     Bad(2, "Неудовлетворительно"),
     DidntShow(0, "Не явился");
 
-    private final int mark;
-    private final String strvalue;
+    private final int value;
+    private final String description;
 
-    Mark(int mark, String strvalue) {
-        this.mark = mark;
-        this.strvalue = strvalue;
+    Mark(int value, String description) {
+        this.value = value;
+        this.description = description;
     }
 
+    @JsonValue
     public int getValue() {
-        return mark;
+        return value;
     }
 
-    public String getStrvalue() {
-        return strvalue;
+    public String getDescription() {
+        return description;
     }
 }

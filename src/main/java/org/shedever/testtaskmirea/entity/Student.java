@@ -1,6 +1,7 @@
 package org.shedever.testtaskmirea.entity;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.shedever.testtaskmirea.model.Mark;
 import org.shedever.testtaskmirea.model.MarkRecord;
@@ -10,6 +11,7 @@ import java.util.List;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class Student {
     private String name;
     private int course;
@@ -22,7 +24,7 @@ public class Student {
 
     public void addMark(StudyObject studyObject, int term, Mark mark) {
         try {
-            this.gradebook.add(new MarkRecord(this, studyObject, studyObject.getTeacher(), term, mark));
+            this.gradebook.add(new MarkRecord(studyObject, studyObject.getTeacher(), term, mark));
         } catch (Exception e) {
             e.printStackTrace();
         }

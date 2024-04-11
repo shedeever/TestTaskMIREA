@@ -1,10 +1,12 @@
 package org.shedever.testtaskmirea.entity;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class StudyObject {
     private String name;
     private int countOfTerms;

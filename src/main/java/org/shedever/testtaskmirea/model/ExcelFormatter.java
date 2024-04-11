@@ -7,7 +7,6 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.shedever.testtaskmirea.entity.Student;
 import org.shedever.testtaskmirea.entity.StudyObject;
 
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.*;
@@ -84,7 +83,7 @@ public class ExcelFormatter {
             row.createCell(0).setCellValue(mark.getStudyObject().getName());
             row.createCell(1).setCellValue(mark.getTerm());
             row.createCell(2).setCellValue(mark.getTeacher().getName());
-            row.createCell(3).setCellValue(mark.getMark().getStrvalue());
+            row.createCell(3).setCellValue(mark.getMark().getDescription());
         }
 
         for (int i = 0; i < headerRow.getLastCellNum(); i++) {

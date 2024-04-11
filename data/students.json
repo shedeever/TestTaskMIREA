@@ -1,0 +1,268 @@
+[ {
+  "name" : "Иванов Иван Иванович",
+  "course" : 3,
+  "gradebook" : [ {
+    "studyObject" : {
+      "name" : "Иностранный язык",
+      "countOfTerms" : 2,
+      "teacher" : {
+        "name" : "Пупкин И.О."
+      }
+    },
+    "teacher" : {
+      "name" : "Пупкин И.О."
+    },
+    "term" : 1,
+    "mark" : 5
+  }, {
+    "studyObject" : {
+      "name" : "Программирование на языке Java",
+      "countOfTerms" : 1,
+      "teacher" : {
+        "name" : "Романов К.И."
+      }
+    },
+    "teacher" : {
+      "name" : "Романов К.И."
+    },
+    "term" : 1,
+    "mark" : 5
+  }, {
+    "studyObject" : {
+      "name" : "Разработка серверных частей интернет ресурсов",
+      "countOfTerms" : 1,
+      "teacher" : {
+        "name" : "Cиницын А.В."
+      }
+    },
+    "teacher" : {
+      "name" : "Cиницын А.В."
+    },
+    "term" : 1,
+    "mark" : 5
+  }, {
+    "studyObject" : {
+      "name" : "Математический анализ",
+      "countOfTerms" : 2,
+      "teacher" : {
+        "name" : "Cиницын А.В."
+      }
+    },
+    "teacher" : {
+      "name" : "Cиницын А.В."
+    },
+    "term" : 1,
+    "mark" : 5
+  }, {
+    "studyObject" : {
+      "name" : "История России",
+      "countOfTerms" : 1,
+      "teacher" : {
+        "name" : "Путин В.В."
+      }
+    },
+    "teacher" : {
+      "name" : "Путин В.В."
+    },
+    "term" : 1,
+    "mark" : 5
+  }, {
+    "studyObject" : {
+      "name" : "Иностранный язык",
+      "countOfTerms" : 2,
+      "teacher" : {
+        "name" : "Пупкин И.О."
+      }
+    },
+    "teacher" : {
+      "name" : "Пупкин И.О."
+    },
+    "term" : 2,
+    "mark" : 3
+  }, {
+    "studyObject" : {
+      "name" : "Безопастность жизнедеятельности",
+      "countOfTerms" : 1,
+      "teacher" : {
+        "name" : "Путин В.В."
+      }
+    },
+    "teacher" : {
+      "name" : "Путин В.В."
+    },
+    "term" : 1,
+    "mark" : 3
+  }, {
+    "studyObject" : {
+      "name" : "Системное администрирование",
+      "countOfTerms" : 1,
+      "teacher" : {
+        "name" : "Романов К.И."
+      }
+    },
+    "teacher" : {
+      "name" : "Романов К.И."
+    },
+    "term" : 1,
+    "mark" : 3
+  }, {
+    "studyObject" : {
+      "name" : "Безопастность жизнедеятельности",
+      "countOfTerms" : 1,
+      "teacher" : {
+        "name" : "Путин В.В."
+      }
+    },
+    "teacher" : {
+      "name" : "Путин В.В."
+    },
+    "term" : 1,
+    "mark" : 3
+  }, {
+    "studyObject" : {
+      "name" : "Математический анализ",
+      "countOfTerms" : 2,
+      "teacher" : {
+        "name" : "Cиницын А.В."
+      }
+    },
+    "teacher" : {
+      "name" : "Cиницын А.В."
+    },
+    "term" : 1,
+    "mark" : 2
+  } ]
+}, {
+  "name" : "Басс Олег Александрович",
+  "course" : 2,
+  "gradebook" : [ {
+    "studyObject" : {
+      "name" : "Иностранный язык",
+      "countOfTerms" : 2,
+      "teacher" : {
+        "name" : "Пупкин И.О."
+      }
+    },
+    "teacher" : {
+      "name" : "Пупкин И.О."
+    },
+    "term" : 1,
+    "mark" : 0
+  }, {
+    "studyObject" : {
+      "name" : "Программирование на языке Java",
+      "countOfTerms" : 1,
+      "teacher" : {
+        "name" : "Романов К.И."
+      }
+    },
+    "teacher" : {
+      "name" : "Романов К.И."
+    },
+    "term" : 1,
+    "mark" : 0
+  }, {
+    "studyObject" : {
+      "name" : "Разработка серверных частей интернет ресурсов",
+      "countOfTerms" : 1,
+      "teacher" : {
+        "name" : "Cиницын А.В."
+      }
+    },
+    "teacher" : {
+      "name" : "Cиницын А.В."
+    },
+    "term" : 1,
+    "mark" : 0
+  } ]
+}, {
+  "name" : "Лебедев Артемий Андреевич",
+  "course" : 2,
+  "gradebook" : [ {
+    "studyObject" : {
+      "name" : "Безопастность жизнедеятельности",
+      "countOfTerms" : 1,
+      "teacher" : {
+        "name" : "Путин В.В."
+      }
+    },
+    "teacher" : {
+      "name" : "Путин В.В."
+    },
+    "term" : 1,
+    "mark" : 0
+  }, {
+    "studyObject" : {
+      "name" : "Математический анализ",
+      "countOfTerms" : 2,
+      "teacher" : {
+        "name" : "Cиницын А.В."
+      }
+    },
+    "teacher" : {
+      "name" : "Cиницын А.В."
+    },
+    "term" : 1,
+    "mark" : 0
+  }, {
+    "studyObject" : {
+      "name" : "Криптографические методы защиты информации",
+      "countOfTerms" : 1,
+      "teacher" : {
+        "name" : "Пупкин И.О."
+      }
+    },
+    "teacher" : {
+      "name" : "Пупкин И.О."
+    },
+    "term" : 1,
+    "mark" : 0
+  } ]
+}, {
+  "name" : "Цукерберг Марк",
+  "course" : 3,
+  "gradebook" : [ {
+    "studyObject" : {
+      "name" : "Программирование на языке Java",
+      "countOfTerms" : 1,
+      "teacher" : {
+        "name" : "Романов К.И."
+      }
+    },
+    "teacher" : {
+      "name" : "Романов К.И."
+    },
+    "term" : 1,
+    "mark" : 0
+  }, {
+    "studyObject" : {
+      "name" : "Разработка серверных частей интернет ресурсов",
+      "countOfTerms" : 1,
+      "teacher" : {
+        "name" : "Cиницын А.В."
+      }
+    },
+    "teacher" : {
+      "name" : "Cиницын А.В."
+    },
+    "term" : 1,
+    "mark" : 0
+  }, {
+    "studyObject" : {
+      "name" : "Математический анализ",
+      "countOfTerms" : 2,
+      "teacher" : {
+        "name" : "Cиницын А.В."
+      }
+    },
+    "teacher" : {
+      "name" : "Cиницын А.В."
+    },
+    "term" : 1,
+    "mark" : 0
+  } ]
+}, {
+  "name" : "Маск Илон",
+  "course" : 4,
+  "gradebook" : [ ]
+} ]
