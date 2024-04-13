@@ -4,6 +4,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.shedever.testtaskmirea.entity.MarkRecord;
 import org.shedever.testtaskmirea.entity.Student;
 import org.shedever.testtaskmirea.entity.StudyObject;
 
@@ -33,7 +34,7 @@ public class ExcelFormatter {
         int iterRow = 1;
         for (Student student : students) {
             Row row = sheet.createRow(iterRow++);
-            row.createCell(0).setCellValue(student.getName());
+            row.createCell(0).setCellValue(student.getFullName());
             row.createCell(1).setCellValue(student.getCountByMark(Mark.Great));
             row.createCell(2).setCellValue(student.getCountByMark(Mark.Well));
             row.createCell(3).setCellValue(student.getCountByMark(Mark.Good));
@@ -48,7 +49,7 @@ public class ExcelFormatter {
     }
 
     public void createBadObjects(Map<StudyObject, Integer> debts) {
-        List<Map.Entry<StudyObject, Integer>> debtsList = MarkRecord.sortDebtsList(debts);
+        List<Map.Entry<StudyObject, Integer>> debtsList = Debts.sortDebtsList(debts);
 
         Sheet sheet = workbook.createSheet("Задолженности");
         Row headerRow = sheet.createRow(0);
@@ -69,7 +70,7 @@ public class ExcelFormatter {
     }
 
     public void createGradeBook(Student student) {
-        Sheet sheet = workbook.createSheet("Зачетная книжка " + student.getName());
+        Sheet sheet = workbook.createSheet("Зачетная книжка " + student.getFullName());
         Row headerRow = sheet.createRow(0);
 
         headerRow.createCell(0).setCellValue("Предмет");
@@ -82,7 +83,7 @@ public class ExcelFormatter {
             Row row = sheet.createRow(iterRow++);
             row.createCell(0).setCellValue(mark.getStudyObject().getName());
             row.createCell(1).setCellValue(mark.getTerm());
-            row.createCell(2).setCellValue(mark.getTeacher().getName());
+            row.createCell(2).setCellValue(mark.getTeacher().getFullName());
             row.createCell(3).setCellValue(mark.getMark().getDescription());
         }
 

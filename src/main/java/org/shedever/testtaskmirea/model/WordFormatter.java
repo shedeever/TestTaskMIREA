@@ -3,6 +3,7 @@ package org.shedever.testtaskmirea.model;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFTable;
 import org.apache.poi.xwpf.usermodel.XWPFTableRow;
+import org.shedever.testtaskmirea.entity.MarkRecord;
 import org.shedever.testtaskmirea.entity.Student;
 import org.shedever.testtaskmirea.entity.StudyObject;
 
@@ -29,7 +30,7 @@ public class WordFormatter {
 
         for (Student student : students) {
             XWPFTableRow row = table.createRow();
-            row.getCell(0).setText(student.getName());
+            row.getCell(0).setText(student.getFullName());
             row.getCell(1).setText(String.valueOf(student.getCountByMark(Mark.Great)));
             row.getCell(2).setText(String.valueOf(student.getCountByMark(Mark.Well)));
             row.getCell(3).setText(String.valueOf(student.getCountByMark(Mark.Good)));
@@ -42,7 +43,7 @@ public class WordFormatter {
     }
 
     public static void createBadObjects(Map<StudyObject, Integer> debts) {
-        List<Map.Entry<StudyObject, Integer>> debtsList = MarkRecord.sortDebtsList(debts);
+        List<Map.Entry<StudyObject, Integer>> debtsList = Debts.sortDebtsList(debts);
 
         XWPFDocument document = new XWPFDocument();
 
@@ -77,11 +78,11 @@ public class WordFormatter {
             XWPFTableRow row = table.createRow();
             row.getCell(0).setText(mark.getStudyObject().getName());
             row.getCell(1).setText(String.valueOf(mark.getTerm()));
-            row.getCell(2).setText(mark.getTeacher().getName());
+            row.getCell(2).setText(mark.getTeacher().getFullName());
             row.getCell(3).setText(mark.getMark().getDescription());
         }
 
-        saveFile("documents/Зачетка " + student.getName() + ".docx", document);
+        saveFile("documents/Зачетка " + student.getFullName() + ".docx", document);
     }
 
     private static void saveFile(String filename, XWPFDocument document) {

@@ -1,10 +1,10 @@
 package org.shedever.testtaskmirea.entity;
 
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.shedever.testtaskmirea.model.Mark;
-import org.shedever.testtaskmirea.model.MarkRecord;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,14 +12,30 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+@Entity
+@Table(name = "student")
 public class Student {
-    private String name;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String firstName;
+    private String lastName;
+    private String patronymic;
     private int course;
-    private List<MarkRecord> gradebook = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "student_id")
+    private List<MarkRecord> gradebook;
 
-    public Student(String name, int course) {
-        this.name = name;
+    public Student(String firstName, String lastName, String patronymic, int course) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.patronymic = patronymic;
         this.course = course;
+        this.gradebook = new ArrayList<>();
+    }
+
+    public String getFullName(){
+        return lastName + " " + firstName + " " + patronymic;
     }
 
     public void addMark(StudyObject studyObject, int term, Mark mark) {
@@ -63,7 +79,7 @@ public class Student {
     @Override
     public String toString() {
         return String.format("%s - %d | %d | %d | %d | %d | %.1f |",
-                getName(),
+                getFullName(),
                 getCountByMark(Mark.Great),
                 getCountByMark(Mark.Well),
                 getCountByMark(Mark.Good),
