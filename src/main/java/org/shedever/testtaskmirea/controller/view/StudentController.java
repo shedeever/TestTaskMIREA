@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -30,8 +31,10 @@ public class StudentController {
     private StudyObjectService studyObjectService;
 
     @GetMapping("/student")
-    public String students(@RequestParam("index") Long id, Model model) {
-        Student student = studentService.getStudent(id);
+    public String students(@RequestParam("lastName") String lastName,
+                           @RequestParam("firstName") String firstName,
+                           @RequestParam("patronymic") String patronymic, Model model) {
+        Student student = studentService.getStudentByFullName(firstName, lastName, patronymic);
         StudentDto studentDto = new StudentDto(student.getFullName(),
                 student.getCountByMark(Mark.Great),
                 student.getCountByMark(Mark.Well),
@@ -47,26 +50,39 @@ public class StudentController {
 
     @PostMapping("/student/deletemark")
     public String deletemark(@RequestParam(name = "index") Long id,
-                          @RequestParam(name = "studentId") Long studentId, Model model) {
+                             @RequestParam(name = "studentId") Long studentId,
+                             RedirectAttributes redirectAttributes, Model model) {
         markRecordService.deleteMarkByMarkId(id);
 
-        return "redirect:/student?index=" + studentId;
+        Student student = studentService.getStudent(studentId);
+
+        redirectAttributes.addAttribute("lastName", student.getLastName());
+        redirectAttributes.addAttribute("firstName", student.getFirstName());
+        redirectAttributes.addAttribute("patronymic", student.getPatronymic());
+
+        return "redirect:/student";
     }
 
     @PostMapping("/student/addmark")
     public String addmark(@RequestParam(name = "studyObjectName") String studyObjectName,
                           @RequestParam(name = "mark") int markInt,
                           @RequestParam(name = "studentId") Long studentId,
-                          @RequestParam(name = "term") int term, Model model) {
+                          @RequestParam(name = "term") int term, RedirectAttributes redirectAttributes, Model model) {
         MarkRecord markRecord = new MarkRecord();
 
         StudyObject studyObject = studyObjectService.getStudyObjectByName(studyObjectName);
         MarkRecord bufMarkRecord = markRecordService.findMarkByStudyObject(studyObject);
+
+        Student student = studentService.getStudent(studentId);
+
+        redirectAttributes.addAttribute("lastName", student.getLastName());
+        redirectAttributes.addAttribute("firstName", student.getFirstName());
+        redirectAttributes.addAttribute("patronymic", student.getPatronymic());
+
         if (bufMarkRecord != null && bufMarkRecord.getTerm() == term)
-            return "redirect:/student?index=" + studentId;
+            return "redirect:/student";
 
         Mark mark = Mark.getMark(markInt);
-        Student student = studentService.getStudent(studentId);
 
         markRecord.setStudyObject(studyObject);
         markRecord.setTerm(term);
@@ -75,7 +91,8 @@ public class StudentController {
         student.addMark(studyObject, term, mark);
 
         studentService.saveStudent(student);
-        return "redirect:/student?index=" + studentId;
+
+        return "redirect:/student";
     }
 
     @GetMapping("/createexcel")

@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.shedever.testtaskmirea.model.Mark;
 
 @Entity
@@ -16,8 +18,10 @@ public class MarkRecord {
     private Long id;
     @ManyToOne
     @JoinColumn(name = "studyObject_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private StudyObject studyObject;
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Teacher teacher;
     private int term;
     @Enumerated(EnumType.STRING)

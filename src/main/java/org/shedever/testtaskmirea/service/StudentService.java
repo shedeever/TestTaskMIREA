@@ -1,6 +1,5 @@
 package org.shedever.testtaskmirea.service;
 
-import org.shedever.testtaskmirea.entity.MarkRecord;
 import org.shedever.testtaskmirea.entity.Student;
 import org.shedever.testtaskmirea.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,5 +29,9 @@ public class StudentService {
     public boolean deleteStudent(Long id) {
         studentRepository.deleteById(id);
         return true;
+    }
+
+    public Student getStudentByFullName(String firstName, String lastName, String patronymic) {
+        return studentRepository.findByFirstNameAndLastNameAndPatronymic(firstName, lastName, patronymic);
     }
 }

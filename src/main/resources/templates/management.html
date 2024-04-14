@@ -19,6 +19,12 @@
         <td th:text="${studyObject.getName()}">Название</td>
         <td th:text="${studyObject.getCountOfTerms()}">Количество предметов</td>
         <td th:text="${studyObject.getTeacher().getFullName()}">Преподаватель</td>
+        <td>
+            <form action="#" th:action="@{/management/deletestudyobject}" method="post">
+                <input type="hidden" name="studyObjectId" th:value="${studyObject.getId()}"/>
+                <button type="submit">Delete</button>
+            </form>
+        </td>
     </tr>
     </tbody>
 </table>
@@ -27,13 +33,42 @@
     <thead>
     <tr>
         <th>ID преподавателя</th>
-        <th>Количество предметов</th>
+        <th>ФИО преподавателя</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="teacher : ${teachers}">
         <td th:text="${teacher.getId()}">ID</td>
         <td th:text="${teacher.getFullName()}">ФИО преподавателя</td>
+        <td>
+            <form action="#" th:action="@{/management/deleteteacher}" method="post">
+                <input type="hidden" name="teacherId" th:value="${teacher.getId()}"/>
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<h1>Студенты</h1>
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID студента</th>
+        <th>ФИО студента</th>
+        <th>Курс</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="student : ${students}">
+        <td th:text="${student.getId()}">ID</td>
+        <td th:text="${student.getFullName()}">ФИО студента</td>
+        <td th:text="${student.getCourse()}">Курс</td>
+        <td>
+            <form action="#" th:action="@{/management/deletestudent}" method="post">
+                <input type="hidden" name="studentId" th:value="${student.getId()}"/>
+                <button type="submit">Delete</button>
+            </form>
+        </td>
     </tr>
     </tbody>
 </table>
@@ -44,12 +79,19 @@
     <input type="text" name="teacherId" placeholder="ID преподавателя" required>
     <button type="submit">Добавить</button>
 </form>
-
 <form action="#" th:action="@{/management/addteacher}" method="post">
     <p>Добавить преподавателя:</p>
+    <input type="text" name="lastName" placeholder="Фамилия" required>
     <input type="text" name="firstName" placeholder="Имя" required>
     <input type="text" name="patronymic" placeholder="Отчество" required >
+    <button type="submit">Добавить</button>
+</form>
+<form action="#" th:action="@{/management/addstudent}" method="post">
+    <p>Добавить студента:</p>
     <input type="text" name="lastName" placeholder="Фамилия" required>
+    <input type="text" name="firstName" placeholder="Имя" required>
+    <input type="text" name="patronymic" placeholder="Отчество" required >
+    <input type="text" name="course" placeholder="Курс" required>
     <button type="submit">Добавить</button>
 </form>
 <a href="/">Главная</a>

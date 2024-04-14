@@ -8,7 +8,9 @@
 <h1>Поиск студента</h1>
 <form action="#" th:action="@{/student}" method="get">
     <p>Индекс студента:</p>
-    <input type="text" name="index" required>
+    <input type="text" name="lastName" required>
+    <input type="text" name="firstName" required>
+    <input type="text" name="patronymic">
     <button type="submit">Поиск</button>
 </form>
 <form action="#" th:action="@{/debts}" method="get">
