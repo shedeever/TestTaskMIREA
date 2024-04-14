@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Поиск студента</h1>
+<form action="#" th:action="@{/student}" method="get">
+    <p>Индекс студента:</p>
+    <input type="text" name="index" required>
+    <button type="submit">Поиск</button>
+</form>
+<form action="#" th:action="@{/debts}" method="get">
+    <button type="submit" class="button">Показать задолженности</button>
+</form>
+<form action="#" th:action="@{/management}" method="get">
+    <button type="submit" class="button">Управление предметами и преподавателями</button>
+</form>
+<form action="#" th:action="@{/createexcel}" method="get">
+    <button type="submit" class="button">Выгрузить Excel файл</button>
+</form>
+<form action="#" th:action="@{/createword}" method="get">
+    <button type="submit" class="button">Выгрузить Word файл</button>
+</form>
+</body>
+</html>

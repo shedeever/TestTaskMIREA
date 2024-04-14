@@ -1,11 +1,13 @@
-package org.shedever.testtaskmirea.controller;
+package org.shedever.testtaskmirea.controller.rest;
 
 import org.shedever.testtaskmirea.dto.StudentDto;
 import org.shedever.testtaskmirea.entity.MarkRecord;
 import org.shedever.testtaskmirea.entity.Student;
 import org.shedever.testtaskmirea.entity.StudyObject;
 import org.shedever.testtaskmirea.model.Debts;
+import org.shedever.testtaskmirea.model.ExcelFormatter;
 import org.shedever.testtaskmirea.model.Mark;
+import org.shedever.testtaskmirea.model.WordFormatter;
 import org.shedever.testtaskmirea.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,23 +17,32 @@ import org.springframework.web.bind.annotation.*;
 import java.util.*;
 
 @RestController
-public class StudentContoroller {
+public class StudentRestContoroller {
     @Autowired
     private StudentService studentService;
 
-    @DeleteMapping("/deletestudent/{id}")
+    @GetMapping("/api/getstudent/{id}")
+    public ResponseEntity<Student> getStudent(@PathVariable Long id) {
+        Student student = studentService.getStudent(id);
+        if (student == null)
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+        return new ResponseEntity<>(student, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/api/deletestudent/{id}")
     public ResponseEntity<String> deleteStudentByID(@PathVariable(name = "id") Long id) {
         studentService.deleteStudent(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PostMapping("/addstudent")
+    @PostMapping("/api/addstudent")
     public ResponseEntity<String> addStudent(@RequestBody Student student) {
         studentService.saveStudent(student);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @GetMapping("/students")
+    @GetMapping("/api/getstudents")
     public ResponseEntity<List<Student>> getStudents() {
         final List<Student> students = studentService.getAllStudents();
 
@@ -41,7 +52,7 @@ public class StudentContoroller {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("/getgradebook/{id}")
+    @GetMapping("/api/getgradebook/{id}")
     public ResponseEntity<List<MarkRecord>> getGradebook(@PathVariable Long id) {
         Student student = studentService.getStudent(id);
         List<MarkRecord> gradebook = student.getGradebook();
@@ -52,7 +63,7 @@ public class StudentContoroller {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("/getcountmarks")
+    @GetMapping("/api/getcountmarks")
     public ResponseEntity<List<StudentDto>> getMarks() {
         List<Student> students = studentService.getAllStudents();
         List<StudentDto> marks = new ArrayList<>();
@@ -73,7 +84,7 @@ public class StudentContoroller {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("/getcountdebts")
+    @GetMapping("/api/getcountdebts")
     public ResponseEntity<Map<String, Integer>> getCountDebts(){
         List<Student> students = studentService.getAllStudents();
 
@@ -86,5 +97,34 @@ public class StudentContoroller {
             return new ResponseEntity<>(debtsList, HttpStatus.OK);
 
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping("/api/createexcel")
+    public ResponseEntity<String> createExcel() {
+        List<Student> students = studentService.getAllStudents();
+        ExcelFormatter excelFormatter = new ExcelFormatter();
+
+        excelFormatter.createStudentsList(students);
+        excelFormatter.createBadObjects(Debts.countDebts(students));
+
+        for (Student student : students) {
+            excelFormatter.createGradeBook(student);
+        }
+
+        excelFormatter.saveFile("documents/Отчет.xlsx");
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @GetMapping("/api/createword")
+    public ResponseEntity<String> createWord() {
+        List<Student> students = studentService.getAllStudents();
+        WordFormatter.createStudentsList(students);
+        WordFormatter.createBadObjects(Debts.countDebts(students));
+
+        for (Student student : students) {
+            WordFormatter.createGradeBook(student);
+        }
+
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }

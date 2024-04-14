@@ -19,6 +19,15 @@ public enum Mark {
         this.description = description;
     }
 
+    public static Mark getMark(int value) {
+        for (Mark mark : Mark.values()) {
+            if (mark.value == value) {
+                return mark;
+            }
+        }
+        return null;
+    }
+
     @JsonValue
     public int getValue() {
         return value;

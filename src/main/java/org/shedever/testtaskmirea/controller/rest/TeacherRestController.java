@@ -1,4 +1,4 @@
-package org.shedever.testtaskmirea.controller;
+package org.shedever.testtaskmirea.controller.rest;
 
 import org.shedever.testtaskmirea.entity.Teacher;
 import org.shedever.testtaskmirea.service.TeacherService;
@@ -10,17 +10,17 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-public class TeacherController {
+public class TeacherRestController {
     @Autowired
     private TeacherService teacherService;
 
-    @PostMapping("/addteacher")
+    @PostMapping("/api/addteacher")
     public ResponseEntity<String> addTeacher(@RequestBody Teacher teacher) {
         teacherService.saveTeacher(teacher);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @GetMapping("/getteachers")
+    @GetMapping("/api/getteachers")
     public ResponseEntity<List<Teacher>> getTeachers() {
         List<Teacher> teachers = teacherService.getAllTeachers();
 
@@ -30,7 +30,7 @@ public class TeacherController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @DeleteMapping("/deleteteachers/{id}")
+    @DeleteMapping("/api/deleteteachers/{id}")
     public ResponseEntity<String> deleteTeacher(@PathVariable Long id) {
         teacherService.deleteTeacher(id);
         return new ResponseEntity<>(HttpStatus.GONE);

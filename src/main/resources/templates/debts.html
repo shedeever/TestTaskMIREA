@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Debts</title>
+</head>
+<body>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Дисциплина</th>
+        <th>Количество задолженностей</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="debtsIter : ${debtsList}">
+        <td th:text="${debtsIter.getKey().getName()}">Дисциплина</td>
+        <td th:text="${debtsIter.getValue()}">Количество задолженностей</td>
+    </tr>
+    </tbody>
+</table>
+<a href="/">Главная</a>
+</body>
+</html>

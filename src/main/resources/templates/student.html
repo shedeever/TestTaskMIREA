@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Студенты</title>
+</head>
+<body>
+<h1>Информация о студенте</h1>
+<div>
+    <p><strong>Имя:</strong> <span th:text="${student.getFullName()}">Имя</span></p>
+    <p><strong>Курс:</strong> <span th:text="${student.getCourse()}">Курс</span></p>
+    <h1>Оценки студента</h1>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Дисциплина</th>
+            <th>Преподаватель</th>
+            <th>Семестр</th>
+            <th>Оценка</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="gradebook : ${student.getGradebook()}">
+            <td th:text="${gradebook.getStudyObject().getName()}">Дисциплина</td>
+            <td th:text="${gradebook.getTeacher().getFullName()}">Преподаватель</td>
+            <td th:text="${gradebook.getTerm()}">Семестр</td>
+            <td th:text="${gradebook.getMark().getDescription()}">Оценка</td>
+            <td>
+                <form action="#" th:action="@{/student/deletemark}" method="post">
+                    <input type="hidden" id="markId" name="index" th:value="${gradebook.getId()}"/>
+                    <input type="hidden" id="userId" name="studentId" th:value="${student.getId()}"/>
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Количество оценок отлично</th>
+            <th>Количество оценок хорошо</th>
+            <th>Количество оценок удовлетворительно</th>
+            <th>Количество оценок неудовлетворительно</th>
+            <th>Количество неявок</th>
+            <th>Средний балл</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text="${countmarks.getCountGreat()}">Количество оценок отлично</td>
+            <td th:text="${countmarks.getCountWell()}">Количество оценок хорошо</td>
+            <td th:text="${countmarks.getCountGood()}">Количество оценок удовлетворительно</td>
+            <td th:text="${countmarks.getCountBad()}">Количество оценок неудовлетворительно</td>
+            <td th:text="${countmarks.getCountDidntShow()}">Количество неявок</td>
+            <td th:text="${countmarks.getAverange()}">Средний балл</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<form action="#" th:action="@{/student/addmark}" method="post">
+    <p>Добавить оценку:</p>
+    <input type="text" name="studyObjectName" placeholder="Название предмета" required>
+    <input type="text" name="term" placeholder="Семестр" required >
+    <input type="text" name="mark" placeholder="Оценка" required>
+    <input type="hidden" name="studentId" th:value="${student.getId()}" required>
+    <button type="submit">Добавить</button>
+</form>
+<a href="/">Главная</a>
+</body>
+</html>
